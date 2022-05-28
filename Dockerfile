@@ -4,7 +4,6 @@ LABEL version="1.0"
 LABEL author="James Shipman"
 LABEL tools="echo for api payload response"
 
-ENV GIN_MODE=debug
 ENV PORT=8080
 
 WORKDIR /app
