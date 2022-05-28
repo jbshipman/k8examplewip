@@ -2,16 +2,15 @@ package main
 
 import (
 	"net/http"
-
+	"os"
 	"time"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
-// easter egg structure
-type easteregg struct {
-	Message string `json:"message"`
-}
+// time
+var t = time.Now()
 
 // alltings api structure
 type allthing struct {
@@ -19,36 +18,33 @@ type allthing struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
-// for the timestamp
-var t = time.Now()
-
-// easter egg payload
-var eastereggs = []easteregg{
-	{Message: "Hello there! this is the easter egg. The required stuff is at root."},
-}
-
 // allthings payload
 var allthings = []allthing{
-	{Message: "Automate all the things!", Timestamp: t.UTC()},
-}
-
-// get the root payload
-func getEasterEgg(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, eastereggs)
-}
-
-// get the api payload
-func getAllthings(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, allthings)
+	{
+		Message:   "Automate all the things!",
+		Timestamp: t.UTC(),
+	},
 }
 
 func main() {
-	router := gin.Default()
-	// set a trusted proxy
-	router.SetTrustedProxies([]string{"128.0.0.1/24"})
 
-	router.GET("/", getAllthings)
-	router.GET("/easteregg", getEasterEgg)
+	e := echo.New()
 
-	router.Run("localhost:8180")
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, allthings)
+	})
+
+	e.GET("/easteregg", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, struct{ Status string }{Status: "This is the easter egg payload."})
+	})
+
+	httpPort := os.Getenv("HTTP_PORT")
+	if httpPort == "" {
+		httpPort = "8080"
+	}
+
+	e.Logger.Fatal(e.Start(":" + httpPort))
 }

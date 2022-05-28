@@ -1,13 +1,22 @@
-FROM golang:1.17.10
+FROM golang:1.17.10-alpine3.16
 
-RUN mkdir /app
+LABEL version="1.0"
+LABEL author="James Shipman"
+LABEL tools="echo for api payload response"
 
-ADD . ./app
+ENV GIN_MODE=debug
+ENV PORT=8080
 
 WORKDIR /app
 
-EXPOSE 8180
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
 
-RUN go build -o main .
+COPY *.go ./
 
-CMD ["/app/main"]
+RUN go build -o /little-api
+
+EXPOSE ${PORT}
+
+CMD [ "/little-api" ]
