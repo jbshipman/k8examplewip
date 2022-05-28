@@ -8,17 +8,33 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// basic api structure
+// easter egg structure
+type easteregg struct {
+	Message string `json:"message"`
+}
+
+// alltings api structure
 type allthing struct {
 	Message   string    `json:"message"`
 	Timestamp time.Time `json:"timestamp"`
 }
 
+// for the timestamp
 var t = time.Now()
 
-// basic api payload
+// easter egg payload
+var eastereggs = []easteregg{
+	{Message: "Hello there! this is the easter egg. The required stuff is at root."},
+}
+
+// allthings payload
 var allthings = []allthing{
 	{Message: "Automate all the things!", Timestamp: t.UTC()},
+}
+
+// get the root payload
+func getEasterEgg(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, eastereggs)
 }
 
 // get the api payload
@@ -29,12 +45,10 @@ func getAllthings(c *gin.Context) {
 func main() {
 	router := gin.Default()
 	// set a trusted proxy
-	router.SetTrustedProxies([]string{"192.168.0.1"})
+	router.SetTrustedProxies([]string{"128.0.0.1/24"})
 
-	router.GET("/allthings", getAllthings)
-
-	// set root to getAllthings as well
 	router.GET("/", getAllthings)
+	router.GET("/easteregg", getEasterEgg)
 
-	router.Run("localhost:8080")
+	router.Run("localhost:8180")
 }

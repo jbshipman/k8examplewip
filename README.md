@@ -25,12 +25,4 @@ Deloy in a public clould using a Kubernetes cluser. The cluster provisioning and
 *Wizbangs and Nernits*
 
 ## Project Notes
-
-### API Structure
-Option 1:
-- /things/all     (to be the route to the required payload)
-- /things         (location of that which I can add to the project)
-
-Option 2:
-- root            (route to required payload)
-- /things         (additional payload )
+Using GO for the api, sticking to version 1.17.10 in this project.
