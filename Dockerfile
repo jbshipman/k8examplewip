@@ -2,10 +2,7 @@ FROM golang:1.17.10
 
 RUN mkdir /app
 
-COPY go.mod ./app
-COPY go.sum ./app
-
-RUN go mod download
+ADD . ./app
 
 WORKDIR /app
 
