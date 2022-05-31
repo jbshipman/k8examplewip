@@ -38,7 +38,7 @@ func main() {
 	})
 
 	e.GET("/easteregg", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct{ Status string }{Status: "This is the easter egg payload."})
+		return c.JSON(http.StatusOK, struct { Status string }{Status: "This is the easter egg payload."})
 	})
 
 	httpPort := os.Getenv("HTTP_PORT")

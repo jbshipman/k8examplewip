@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: littleapi
+spec:
+  selector:
+    matchLabels:
+      app: littleapi
+  template:
+    metadata:
+      labels:
+        app: littleapi
+    spec:
+      containers:
+      - name: littleapi
+        image: littleapi:0.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
