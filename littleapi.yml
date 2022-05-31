@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: littleapi
+  name: littleapi-deployment
 spec:
   selector:
     matchLabels:
@@ -13,10 +13,30 @@ spec:
     spec:
       containers:
       - name: littleapi
-        image: littleapi:0.1
+        image: ronkilav/littleapi:latest
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 8080
+
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: littleapi-service
+#   namespace: default
+#   labels:
+#     app: littleapi
+# spec:
+#   # externalTrafficPolicy: Cluster
+#   ports:
+#   - name: http
+#     port: 80
+#     protocol: TCP
+#     targetPort: 8080
+#   selector:    
+#     app: littleapi
+#     type: NodePort
+
