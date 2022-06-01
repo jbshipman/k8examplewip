@@ -13,7 +13,7 @@ Using a programming language of my choosing expose a REST endpoint that returns 
 }
 ```
 
-Deloy in a public clould using a Kubernetes cluser. The cluster provisioning and application deployment is be all via code.
+Deloy in a public clould using a Kubernetes cluser. The cluster provisioning and application deployment is be done all via code.
 
 ## Requirements
 - All code in a public git repo.
@@ -22,7 +22,5 @@ Deloy in a public clould using a Kubernetes cluser. The cluster provisioning and
 - Launch and deploy should be able to be done on any public cloud account (end user's choice basically).
 - Automated testing to ensure environment is properly configured and validated.
 
-*Wizbangs and Nernits*
-
 ## Project Notes
-Using GO for the api, sticking to version 1.17.10 in this project.
+Using GO for the api and deploying to GKE
