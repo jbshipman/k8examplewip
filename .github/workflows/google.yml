@@ -22,7 +22,7 @@ env:
   GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: jbshipman-littleapi-1    # TODO: update to cluster name
   GKE_ZONE: us-central1-c   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: gke-littleapi # TODO: update to deployment name
+  DEPLOYMENT_NAME: littleapi # TODO: update to deployment name
   REPOSITORY: ronkilav/littleapi:latest # TODO: update to Artifact Registry docker repository
   IMAGE: static-site
 
@@ -46,8 +46,8 @@ jobs:
       uses: 'google-github-actions/auth@v0'
       with:
         token_format: 'access_token'
-        workload_identity_provider: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-        service_account: 'my-service-account@my-project.iam.gserviceaccount.com'
+        workload_identity_provider: 'projects/857821681480/locations/global/workloadIdentityPools/my-pool/*'
+        service_account: '857821681480-compute@JBShipman-little-api.iam.gserviceaccount.com'
 
     # Alternative option - authentication via credentials json
     # - id: 'auth'
