@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: littleapi-deploy
+  labels:
+    app: littleapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: littleapi
+  template:
+    metadata:
+      labels:
+        app: littleapi
+    spec:
+      containers:
+      - name: littleapi-deploy
+        image: ronkilav/littleapi:latest
+        ports:
+          - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: "128M"
+          limits:
+            cpu: 100m
+            memory: "256M"
