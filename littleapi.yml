@@ -1,22 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: littleapi
+  name: littleapi-deploy
+  labels:
+    app: littleapi-deploy
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: littleapi
+      app: littleapi-deploy
   template:
     metadata:
       labels:
-        app: littleapi
+        app: littleapi-deploy
     spec:
       containers:
-      - name: littleapi
-        image: littleapi:0.1
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 8080
+      - name: littleapi-deploy
+        image: ronkilav/littleapi:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: littleapi-service
+  labels:
+    app: little-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: littleapi-deploy

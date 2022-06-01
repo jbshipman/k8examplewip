@@ -34,11 +34,11 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, allthings)
+		return c.JSONPretty(http.StatusOK, allthings, " ")
 	})
 
 	e.GET("/easteregg", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct { Status string }{Status: "This is the easter egg payload."})
+		return c.JSONPretty(http.StatusOK, struct{ Status string }{Status: "This is the easter egg payload."}, " ")
 	})
 
 	httpPort := os.Getenv("HTTP_PORT")

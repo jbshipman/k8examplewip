@@ -4,7 +4,7 @@ LABEL version="1.0"
 LABEL author="James Shipman"
 LABEL tools="echo for api payload response"
 
-# ENV PORT=8080
+ENV PORT=8080
 
 WORKDIR /app
 
@@ -14,8 +14,8 @@ RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /little-api
+RUN go build -o /littleapi
 
-# EXPOSE ${PORT}
+EXPOSE ${PORT}
 
-CMD [ "/little-api" ]
+CMD [ "/littleapi" ]
