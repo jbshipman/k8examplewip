@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: littleapi-app
+  labels:
+    app: littleapi
+spec:
+  type: LoadBalancer
+  ports:
+  - name: littleapi-http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: littleapi
