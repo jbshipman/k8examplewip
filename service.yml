@@ -9,8 +9,8 @@ spec:
   type: LoadBalancer
   ports:
   - name: littleapi-http
-    port: 80
+    port: 3030
     protocol: TCP
-    targetPort: 80
+    targetPort: 3030
   selector:
     app: littleapi

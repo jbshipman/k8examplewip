@@ -4,7 +4,7 @@ LABEL version="1.0"
 LABEL author="James Shipman"
 LABEL tools="echo for api payload response"
 
-ENV PORT=8080
+ENV PORT=3030
 
 WORKDIR /app
 
